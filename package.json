@@ -1,0 +1,19 @@
+{
+  "name": "keyforge-cli",
+  "version": "0.1.0",
+  "description": "CLI tool to generate secret keys (SESSION, JWT, API, etc.) and save them to keys.txt",
+  "main": "src/index.js",
+  "bin": {
+    "keyforge": "bin/keyforge"
+  },
+  "scripts": {
+    "start": "node bin/keyforge"
+  },
+  "keywords": ["cli", "jwt", "session", "secret", "key-generator", "security"],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wickmrakchi/keyforge-cli.git"
+  }
+}
