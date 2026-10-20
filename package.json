@@ -22,5 +22,10 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wickmrakchi/keyforge-cli.git"
-  }
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/wickmrakchi/keyforge-cli/issues"
+  },
+  "homepage": "https://github.com/wickmrakchi/keyforge-cli#readme"
 }
