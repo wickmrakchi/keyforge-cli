@@ -115,7 +115,7 @@ for (const arg of args) {
     showHelp();
     process.exit(0);
   } else if (a === '--version' || a === '-v') {
-    console.log('KeyForge v0.1.0');
+    console.log('KeyForge v0.1.1');
     process.exit(0);
   }
 }
