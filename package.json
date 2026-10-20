@@ -9,11 +9,18 @@
   "scripts": {
     "start": "node bin/keyforge"
   },
-  "keywords": ["cli", "jwt", "session", "secret", "key-generator", "security"],
-  "author": "",
+  "keywords": [
+    "cli",
+    "jwt",
+    "session",
+    "secret",
+    "key-generator",
+    "security"
+  ],
+  "author": "MRAKCHI",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wickmrakchi/keyforge-cli.git"
+    "url": "git+https://github.com/wickmrakchi/keyforge-cli.git"
   }
 }

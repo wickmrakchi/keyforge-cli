@@ -11,7 +11,7 @@ Open source and free for everyone.
 - Generate cryptographically secure random keys using Node.js `crypto` module
 - Support multiple key types: JWT, Session, API, Secret
 - Shortcut flag `-c` instead of `--create`
-- Optional `-save` flag to append the key to `keys.txt`
+- Optional `-save` flag to append the key to `keys.txt` **and backup `node_modules`**
 - Each saved key includes: timestamp, key type, and the generated value
 - Zero external dependencies (uses only Node.js built-in modules)
 - MIT License
@@ -20,23 +20,29 @@ Open source and free for everyone.
 
 ## Installation
 
-### Local usage (without publishing)
+### From npm (recommended)
 
 ```bash
-# Navigate to the project folder
-cd ""
+npm install -g keyforge-cli
+```
 
-# Install dependencies (none required, just Node.js)
+### From source (for development or self-hosting)
+
+```bash
+# Clone the repository
+git clone https://github.com/wickmrakchi/keyforge-cli.git
+cd keyforge-cli
+
+# Install dependencies
 npm install
 
-# Run the tool directly
+# Run directly
 node bin/keyforge --create -jwt
 ```
 
-### Global usage (run from anywhere)
+### Link globally (for local development)
 
 ```bash
-# Link the binary globally
 npm link
 ```
 
@@ -56,9 +62,9 @@ keyforge -c -session -save
 |---------|-------------|
 | `keyforge --create -jwt` | Generate and display a JWT key |
 | `keyforge -c -session` | Generate and display a session key (shortcut) |
-| `keyforge -c -session -save` | Generate, display, and save session key to `keys.txt` |
-| `keyforge --create -api -save` | Generate, display, and save an API key |
-| `keyforge --create -secret -save` | Generate, display, and save a general secret key |
+| `keyforge -c -session -save` | Generate, display, save session key to `keys.txt`, and backup `node_modules` |
+| `keyforge --create -api -save` | Generate, display, and save an API key + backup |
+| `keyforge --create -secret -save` | Generate, display, and save a general secret key + backup |
 | `keyforge -h` or `--help` | Show help message |
 | `keyforge -v` or `--version` | Show version number |
 
@@ -67,16 +73,20 @@ keyforge -c -session -save
 ```
 🔑 Key (session): 4e4e6c50aaeed1bf193fbe1106fa891e40604391fdb55998cbdc9e5f9acd9b07
 ✅ Saved to keys.txt
+📦 node_modules backed up to: .keyforge-cli/backups/backup_<timestamp>
 ```
 
-### `keys.txt` format
+### Where files are created
 
-Each saved key is appended as a new line in `keys.txt`:
+| File/Folder | Location |
+|-------------|----------|
+| `keys.txt` | In the current folder where you run the command |
+| `node_modules` backup | In your user home folder under `.keyforge-cli/backups/` |
 
+Each line in `keys.txt`:
 ```
-[2026-10-19 14:30:00] [session] 4e4e6c50aaeed1bf193fbe1106fa891e40604391fdb55998cbdc9e5f9acd9b07
-[2026-10-19 14:35:00] [jwt]     x7y8z9a1b2c3d4e5f6g7h8i9j0k1l2m3
-[2026-10-19 14:40:00] [api]     abc123def456ghi789jkl012mno345pqr
+[2026-10-20 14:30:00] [session] 4e4e6c50aaeed1bf...
+[2026-10-20 14:35:00] [jwt]     x7y8z9a1b2c3d4...
 ```
 
 Each line contains:
@@ -94,7 +104,7 @@ keyforge/
 ├── bin/
 │   └── keyforge          # Executable CLI entry point
 ├── src/
-│   └── index.js          # Core logic: key generation, parsing, saving
+│   └── index.js          # Core logic: key generation, parsing, saving, backup
 ├── .gitignore            # Git ignore rules
 ├── LICENSE               # MIT License
 └── README.md             # This documentation
@@ -102,33 +112,9 @@ keyforge/
 
 ---
 
-## Publishing to GitHub
+## Source Code
 
-```bash
-cd ""
-
-git init
-git add .
-git commit -m "Initial release: KeyForge CLI key generator"
-git branch -M main
-git remote add origin https://github.com/wickmrakchi/keyforge-cli.git
-git push -u origin main
-```
-
-Replace `wickmrakchi` with your actual GitHub username.
-
----
-
-## Publishing to npm
-
-The package name `keyforge-cli` is currently available on npm.
-
-```bash
-npm login
-npm publish
-```
-
-If `keyforge-cli` is taken by the time you publish, change the `"name"` field in `package.json` to an available name and try again.
+The source code is available on GitHub: https://github.com/wickmrakchi/keyforge-cli
 
 ---
 
