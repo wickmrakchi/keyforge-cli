@@ -1,7 +1,7 @@
 # 🔑 KeyForge CLI (`keyforge`)
 
 <p align="center">
-  <img src="https://img.shields.io/badge/npm-v0.1.1-CB3837?style=for-the-badge&logo=npm&logoColor=white" alt="npm version">
+  <img src="https://img.shields.io/badge/npm-v0.1.2-CB3837?style=for-the-badge&logo=npm&logoColor=white" alt="npm version">
   <img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="License">
   <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-000000?style=for-the-badge" alt="Platform">
   <img src="https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js">
