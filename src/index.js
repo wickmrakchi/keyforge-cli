@@ -2,10 +2,10 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
-const os = require('os');
+const { version } = require('../package.json');
 
 const OUTPUT_FILE = path.join(process.cwd(), 'keys.txt');
-const BACKUP_ROOT = path.join(os.homedir(), '.keyforge-cli', 'backups');
+const DEFAULT_BACKUP_ROOT = path.join(process.cwd(), '.keyforge-cli', 'backups');
 
 function ensureDir(dir) {
   if (!fs.existsSync(dir)) {
@@ -27,6 +27,18 @@ function copyDirRecursive(src, dest) {
   }
 }
 
+function getBackupRoot() {
+  const args = process.argv.slice(2);
+  const flagIndex = args.findIndex((a) => a === '--backup' || a === '-backup');
+  if (flagIndex !== -1 && args[flagIndex + 1]) {
+    return path.resolve(args[flagIndex + 1]);
+  }
+  if (process.env.KEYFORGE_BACKUP_DIR) {
+    return path.resolve(process.env.KEYFORGE_BACKUP_DIR);
+  }
+  return DEFAULT_BACKUP_ROOT;
+}
+
 function backupNodeModules() {
   const nm = path.join(process.cwd(), 'node_modules');
   if (!fs.existsSync(nm)) {
@@ -34,13 +46,14 @@ function backupNodeModules() {
     return null;
   }
 
-  ensureDir(BACKUP_ROOT);
+  const backupRoot = getBackupRoot();
+  ensureDir(backupRoot);
   const timestamp = new Date()
     .toISOString()
     .replace(/[-:]/g, '')
     .replace(/\..+/, '')
     .slice(0, 14);
-  const backupDir = path.join(BACKUP_ROOT, `backup_${timestamp}`);
+  const backupDir = path.join(backupRoot, `backup_${timestamp}`);
 
   copyDirRecursive(nm, backupDir);
   return backupDir;
@@ -64,6 +77,7 @@ Options:
   -api           Key type: API
   -secret        Key type: Secret
   -save          Save the key to keys.txt and backup node_modules
+  --backup <path>   Custom backup directory (default: ./.keyforge-cli/backups)
   -h, --help     Show this help message
   -v, --version  Show version
 `);
@@ -115,7 +129,7 @@ for (const arg of args) {
     showHelp();
     process.exit(0);
   } else if (a === '--version' || a === '-v') {
-    console.log('KeyForge v0.1.1');
+    console.log(`KeyForge v${version}`);
     process.exit(0);
   }
 }

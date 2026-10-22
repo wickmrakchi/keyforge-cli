@@ -22,7 +22,7 @@
 - 🔐 **Cryptographically secure** key generation using Node.js `crypto` module
 - 🔑 Support multiple key types: **JWT**, **Session**, **API**, **Secret**
 - ⚡ Shortcut flag `-c` instead of `--create`
-- 💾 `-save` flag to append the key to `keys.txt` **and** automatically backup your `node_modules`
+- 💾 `-save` flag to append the key to `keys.txt` **and** automatically backup your `node_modules` inside your project folder
 - 📅 Every saved key includes: **timestamp**, **key type**, and the **generated value**
 - 📦 **Zero external dependencies** — uses only Node.js built-in modules
 - 🌍 Works on Windows, Linux, and macOS
@@ -62,6 +62,7 @@ npm link
 | `keyforge --create -jwt` | Generate and display a JWT key |
 | `keyforge -c -session` | Generate and display a session key (shortcut) |
 | `keyforge -c -session -save` | Generate, display, save session key to `keys.txt`, and backup `node_modules` |
+| `keyforge -c -session -save --backup /custom/path` | Generate, display, save session key to `keys.txt`, and backup `node_modules` to a custom folder |
 | `keyforge --create -api -save` | Generate, display, and save an API key + backup |
 | `keyforge --create -secret -save` | Generate, display, and save a general secret key + backup |
 | `keyforge -h` or `--help` | Show help message |
@@ -72,7 +73,7 @@ npm link
 ```
 🔑 Key (session): 4e4e6c50aaeed1bf193fbe1106fa891e40604391fdb55998cbdc9e5f9acd9b07
 ✅ Saved to keys.txt
-📦 node_modules backed up to: .keyforge-cli/backups/backup_<timestamp>
+📦 node_modules backed up to: <your-project>/.keyforge-cli/backups/backup_<timestamp>
 ```
 
 ---
@@ -82,7 +83,7 @@ npm link
 | File / Folder | Location |
 |---------------|----------|
 | `keys.txt` | In the **current folder** where you run the command |
-| `node_modules` backup | In your user home folder under `.keyforge-cli/backups/` |
+| `node_modules` backup | In the **current project folder** under `.keyforge-cli/backups/backup_<timestamp>` |
 
 ### `keys.txt` Format
 
